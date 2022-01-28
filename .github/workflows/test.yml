@@ -6,8 +6,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: nansencenter/pynextsim_testing:latest
+    #container:
+    #  image: nansencenter/pynextsim_testing:latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -24,3 +24,4 @@ jobs:
           ls -al 
           ls -al nextsim-tools
           ls -al nextsimf
+          pwd
