@@ -1,4 +1,4 @@
-name: Test Pynextsim
+name: Test Pynextsim and Pynextsimf
 
 on:
   push:
@@ -32,5 +32,6 @@ jobs:
           python -m pytest nextsim-tools/python/pynextsim/tests
       - name: Test pynextsimf
         run: |
+          pip install paramiko
           python -m pytest pynextsimf/tests
         working-directory: nextsimf
