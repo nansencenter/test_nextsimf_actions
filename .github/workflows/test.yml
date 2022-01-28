@@ -1,0 +1,23 @@
+name: Test Pynextsim
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: nansencenter/pynextsim_testing:latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: nansencenter/nextsim-tools
+          token: ${{ secrets.ACCESS_TOKEN }}
+      - uses: actions/checkout@v2
+        with:
+          repository: nansencenter/nextsimf
+          token: ${{ secrets.ACCESS_TOKEN }}
+      - name: List current dir
+        run: |
+          ls -al 
