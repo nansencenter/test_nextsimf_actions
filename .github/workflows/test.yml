@@ -6,7 +6,7 @@ on:
 jobs:
   test:
     env:
-      PYTHONPATH: "/home/runner/work/test_nextsimf_actions/test_nextsimf_actions/nextsim-tools/python:/home/runner/work/test_nextsimf_actions/test_nextsimf_actions/nextsimf"
+      PYTHONPATH: "/home/runner/work/test_nextsimf_actions/test_nextsimf_actions/nextsim-tools/python"
     runs-on: ubuntu-latest
     container:
       image: nansencenter/pynextsim_testing:latest
@@ -27,5 +27,10 @@ jobs:
           ls -al nextsim-tools
           ls -al nextsimf
           pwd
+      - name: Test pynextsim
+        run: |
           python -m pytest nextsim-tools/python/pynextsim/tests
-          python -m pytest nextsimf/pynextsimf/tests
+      - name: Test pynextsimf
+        run: |
+          python -m pytest pynextsimf/tests
+        working-directory: nextsimf
