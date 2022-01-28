@@ -5,9 +5,11 @@ on:
 
 jobs:
   test:
+    env:
+      PYTHONPATH: /home/runner/work/test_nextsimf_actions/test_nextsimf_actions/nextsim-tools/python
     runs-on: ubuntu-latest
-    #container:
-    #  image: nansencenter/pynextsim_testing:latest
+    container:
+      image: nansencenter/pynextsim_testing:latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -25,3 +27,4 @@ jobs:
           ls -al nextsim-tools
           ls -al nextsimf
           pwd
+          python -m pytest nextsim-tools/python/pynextsim/tests
