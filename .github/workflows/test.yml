@@ -2,36 +2,51 @@ name: Test Pynextsim and Pynextsimf
 
 on:
   push:
+# https://drive.google.com/file/d/1DIBBAczt7NaGo5snb-lDfJ8YCRdhEK5Z/view?usp=sharing
 
 jobs:
   test:
     env:
+      NEXTSIM_TEST_DATA_DIR: /test_data
       PYTHONPATH: "/home/runner/work/test_nextsimf_actions/test_nextsimf_actions/nextsim-tools/python"
     runs-on: ubuntu-latest
     container:
       image: nansencenter/pynextsim_testing:latest
+      env:
+        NEXTSIM_TEST_DATA_DIR: ${{ env.TEST_DATA_DIR }}
     steps:
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.NEXTSIM_TEST_DATA_DIR }}
+          key: 0
+        id: cache
+      - name: Download test data
+        run : |
+          mkdir -p $NEXTSIM_TEST_DATA_DIR
+          gdown https://drive.google.com/uc?id=1GvwVxIPi4S_0uJDiSeXURYKu8fCQlLxx -O $TEST_DATA_DIR/
+        if: steps.cache.outputs.cache-hit != 'true'
       - uses: actions/checkout@v2
         with:
           repository: nansencenter/nextsim-tools
           token: ${{ secrets.ACCESS_TOKEN }}
           path: nextsim-tools
-      - uses: actions/checkout@v2
-        with:
-          repository: nansencenter/nextsimf
-          token: ${{ secrets.ACCESS_TOKEN }}
-          path: nextsimf
+#      - uses: actions/checkout@v2
+#        with:
+#          repository: nansencenter/nextsimf
+#          token: ${{ secrets.ACCESS_TOKEN }}
+#          path: nextsimf
       - name: List current dir
         run: |
           ls -al 
           ls -al nextsim-tools
-          ls -al nextsimf
+#          ls -al nextsimf
           pwd
       - name: Test pynextsim
         run: |
           python -m pytest nextsim-tools/python/pynextsim/tests
-      - name: Test pynextsimf
-        run: |
-          pip install paramiko
-          python -m pytest pynextsimf/tests
-        working-directory: nextsimf
+#      - name: Test pynextsimf
+#        run: |
+#          pip install paramiko
+#          python -m pytest pynextsimf/tests
+#        working-directory: nextsimf
