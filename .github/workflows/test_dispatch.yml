@@ -1,0 +1,17 @@
+name: Test dispatch event
+
+on:
+  workflow_dispatch:
+    inputs:
+      pynextsim_ref:
+        description: 'Ref of pynextsim repo'     
+        required: true
+        default: 'master' 
+
+jobs:
+  test_dispatch_event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print inputs
+        run: |
+          echo "${{ github.event.inputs.pynextsim_ref }}"
