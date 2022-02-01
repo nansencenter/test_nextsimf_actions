@@ -1,14 +1,10 @@
-name: Test Pynextsim and Pynextsimf
+name: Test Pynextsim
 
 on:
   workflow_dispatch:
     inputs:
       pynextsim_ref:
         description: 'Branch name of pynextsim repo'     
-        required: true
-        default: 'master' 
-      pynextsimf_ref:
-        description: 'Branch name of pynextsimf repo'
         required: true
         default: 'master'
 
@@ -48,19 +44,9 @@ jobs:
           token: ${{ secrets.ACCESS_TOKEN }}
           path: nextsim-tools
           ref: ${{ github.event.inputs.pynextsim_ref }}
-      - uses: actions/checkout@v2
-        with:
-          repository: nansencenter/nextsimf
-          token: ${{ secrets.ACCESS_TOKEN }}
-          path: nextsimf
-          ref: ${{ github.event.inputs.pynextsimf_ref }}
       - name: List current dir
         run: |
           ls -al 
           ls -al nextsim-tools
-          ls -al nextsimf
       - name: Test pynextsim
         run: python -m pytest nextsim-tools/python/pynextsim/tests
-      - name: Test pynextsimf
-        run: python -m pytest pynextsimf/tests
-        working-directory: nextsimf
