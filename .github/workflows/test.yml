@@ -19,13 +19,13 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.NEXTSIM_TEST_DATA_DIR }}
-          key: 1
+          key: 2
         id: cache
       - name: Download test data
         run : |
           mkdir -p $NEXTSIM_TEST_DATA_DIR
           gdown https://drive.google.com/uc?id=1DIBBAczt7NaGo5snb-lDfJ8YCRdhEK5Z -O $NEXTSIM_TEST_DATA_DIR/
-          tar -xvf $NEXTSIM_TEST_DATA_DIR/test_data.tgz
+          tar -xvf $NEXTSIM_TEST_DATA_DIR/test_data.tgz -C $NEXTSIM_TEST_DATA_DIR/
           mv $NEXTSIM_TEST_DATA_DIR/test_data/* $NEXTSIM_TEST_DATA_DIR/
           rm $NEXTSIM_TEST_DATA_DIR/test_data.tgz
           ls -al $NEXTSIM_TEST_DATA_DIR/
