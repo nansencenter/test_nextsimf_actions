@@ -15,3 +15,9 @@ jobs:
       - name: Print inputs
         run: |
           echo "${{ github.event.inputs.pynextsim_ref }}"
+      - uses: actions/checkout@v2
+        with:
+          repository: nansencenter/nextsim-tools
+          token: ${{ secrets.ACCESS_TOKEN }}
+          path: nextsim-tools
+          ref: ${{ github.event.inputs.pynextsim_ref }}
