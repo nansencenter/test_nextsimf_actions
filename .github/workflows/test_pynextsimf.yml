@@ -18,6 +18,9 @@ jobs:
       image: nansencenter/pynextsim_testing:latest
       env:
         NEXTSIM_TEST_DATA_DIR: ${{ env.TEST_DATA_DIR }}
+        OUTPUT_FORECAST_DATA_DIR: /output_forecast_data_dir
+        NEXTSIM_ENV_ROOT_DIR: /nextsim_env_root_dir
+        NEXTSIM_DATA_DIR: /nextsim_data_dir
     steps:
       - name: Print inputs
         run: |
