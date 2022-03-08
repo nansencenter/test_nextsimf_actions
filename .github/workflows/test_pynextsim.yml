@@ -31,7 +31,7 @@ jobs:
       - name: Download test data
         run : |
           mkdir -p $NEXTSIM_TEST_DATA_DIR
-          gdown https://drive.google.com/uc?id=1DIBBAczt7NaGo5snb-lDfJ8YCRdhEK5Z -O $NEXTSIM_TEST_DATA_DIR/
+          wget -o $NEXTSIM_TEST_DATA_DIR/test_data.tgz ftp://ftp.nersc.no/nextsimf/test_data.tgz #gdown https://drive.google.com/uc?id=1DIBBAczt7NaGo5snb-lDfJ8YCRdhEK5Z -O $NEXTSIM_TEST_DATA_DIR/
           tar -xvf $NEXTSIM_TEST_DATA_DIR/test_data.tgz -C $NEXTSIM_TEST_DATA_DIR/
           mv $NEXTSIM_TEST_DATA_DIR/test_data/* $NEXTSIM_TEST_DATA_DIR/
           rm $NEXTSIM_TEST_DATA_DIR/test_data.tgz
